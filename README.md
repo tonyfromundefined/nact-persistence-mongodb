@@ -1,6 +1,8 @@
 ![NAct Logo](https://raw.githubusercontent.com/ncthbrt/nact/master/assets/logo.svg?sanitize=true)
 
 # nact-persistence-mongodb
+![](https://img.shields.io/npm/v/nact-persistence-mongodb)
+![](https://img.shields.io/npm/l/nact-persistence-mongodb)
 
 A mongodb persistance plugin for NAct.
 

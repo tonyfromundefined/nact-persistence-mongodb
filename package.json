@@ -1,6 +1,8 @@
 {
   "name": "nact-persistence-mongodb",
   "version": "0.1.0",
+  "repository": "https://github.com/tonyfromundefined/nact-persistence-mongodb",
+  "license": "MIT",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -10,6 +12,11 @@
     "./package.json": "./package.json"
   },
   "main": "./lib/index.js",
+  "files": [
+    "lib",
+    "src",
+    "README.md"
+  ],
   "scripts": {
     "build": "nanobundle build"
   },
