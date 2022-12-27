@@ -17,8 +17,8 @@ const mongoClient = new MongoClient("...");
 const system = start(
   configurePersistence(
     new MongoDBPersistenceEngine(mongoClient, {
-      eventsCollectionName: "nact_events" // optional,
-      snapshotsCollectionName: "nact_snapshots" // optional,
+      eventsCollectionName: "nact_events", // optional
+      snapshotsCollectionName: "nact_snapshots", // optional
     }),
   ),
 );
