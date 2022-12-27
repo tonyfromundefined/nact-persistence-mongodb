@@ -4,7 +4,7 @@
 ![](https://img.shields.io/npm/v/nact-persistence-mongodb)
 ![](https://img.shields.io/npm/l/nact-persistence-mongodb)
 
-A mongodb persistance plugin for NAct.
+A MongoDB persistence plugin for [NAct](https://nact.xyz/).
 
 ## Usage
 
