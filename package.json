@@ -18,7 +18,8 @@
     "README.md"
   ],
   "scripts": {
-    "build": "nanobundle build"
+    "build": "nanobundle build",
+    "clean": "rimraf ./lib"
   },
   "resolutions": {
     "nact@^7.6.2": "patch:nact@npm%3A7.6.2#./.yarn/patches/nact-npm-7.6.2-9ad34dcf44.patch"
