@@ -57,7 +57,7 @@ export class MongoDBPersistenceEngine implements PersistenceEngine {
           : null),
       })
       .sort({
-        createdAt: -1,
+        createdAt: 1,
       });
 
     if (!isNil(offset)) {
