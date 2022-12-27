@@ -1,0 +1,53 @@
+diff --git a/lib/index.d.ts b/lib/index.d.ts
+index 3a743b23c066238351def350a4fe6db6617e0166..44df55557a90dee499db7a29268266f6f5918ec9 100644
+--- a/lib/index.d.ts
++++ b/lib/index.d.ts
+@@ -70,7 +70,7 @@ declare module 'nact' {
+   };
+ 
+   export type PersistentActorContext<Msg, ParentRef extends Ref<any>> =
+-    ActorContext<Msg, ParentRef> & { persist: (msg: Msg) => Promise<void> };
++    ActorContext<Msg, ParentRef> & { persist: (msg: Msg) => Promise<void>, recovering: boolean };
+ 
+   export type ActorContextWithMailbox<Msg, ParentRef extends Ref<any>> = ActorContext<Msg, ParentRef> & { mailbox: Msg[] };
+ 
+@@ -93,11 +93,10 @@ declare module 'nact' {
+   export type ActorFunc<State, Msg, ParentRef extends Ref<any>> = (state: State, msg: Msg, ctx: ActorContext<Msg, ParentRef>) =>
+     State | Promise<State>;
+ 
+-
+   export type StatelessActorFunc<Msg, ParentRef extends Ref<any>> = (msg: Msg, ctx: ActorContext<Msg, ParentRef>) =>
+     void | Promise<void>;
+ 
+-  export type PersistentActorFunc<State, Msg, ParentRef extends Ref<any>> = (state: State, msg: Msg, ctx: ActorContext<Msg, ParentRef>) =>
++  export type PersistentActorFunc<State, Msg, ParentRef extends Ref<any>> = (state: State, msg: Msg, ctx: PersistentActorContext<Msg, ParentRef>) =>
+     State | Promise<State>;
+ 
+   export type SupervisionActorFunc<Msg, ParentRef extends Ref<any>, ChildRef extends Ref<any>> = (msg: Msg | undefined, err: Error | undefined, ctx: SupervisionContext<Msg, ParentRef>, child: ChildRef | undefined) => Symbol | Promise<Symbol>;
+@@ -288,7 +287,7 @@ declare module 'nact' {
+ 
+ 
+ 
+-  export type EventStream = PromiseLike<Event[]> & {
++  export type EventStream = PromiseLike<PersistedEvent[]> & {
+     /**
+       * Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
+       * @param callbackfn A function that accepts up to four arguments. The reduce method calls the callbackfn function one time for each element in the array.
+@@ -300,7 +299,7 @@ declare module 'nact' {
+   export interface PersistenceEngine {
+     events(persistenceKey: string, offset: number, limit: number, tags: string[]): EventStream;
+ 
+-    latestSnapshot(persistenceKey: string): Promise<PersistedSnapshot>;
++    latestSnapshot(persistenceKey: string): Promise<PersistedSnapshot | null>;
+ 
+     takeSnapshot(persistedSnapshot: PersistedSnapshot): Promise<void>;
+ 
+@@ -310,8 +309,3 @@ declare module 'nact' {
+   export function configurePersistence(engine: PersistenceEngine): Plugin;
+ 
+ }
+-
+-// declare module 'nact/monad' {
+-//   export abstract class Effect<> { };
+-//   export function* start(program: funct): void;
+-// }
