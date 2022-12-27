@@ -8,8 +8,8 @@ import type {
 
 import { isNil } from "./isNil";
 
-const DEFAULT_EVENT_JOURNAL_NAME = "nact_event_journal";
-const DEFAULT_SNAPSHOT_STORE_NAME = "nact_snapshot_store";
+const DEFAULT_EVENT_JOURNAL_NAME = "nact_events";
+const DEFAULT_SNAPSHOT_STORE_NAME = "nact_snapshots";
 
 export class MongoDBPersistenceEngine implements PersistenceEngine {
   /**

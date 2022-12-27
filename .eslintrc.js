@@ -39,7 +39,7 @@ module.exports = {
     ],
   },
   ignorePatterns: [
-    "**/dist/**/*",
+    "**/lib/**/*",
     ".yarn/**/*",
     ".pnp.cjs",
     ".pnp.loader.mjs",
