@@ -25,17 +25,17 @@ export class MongoDBPersistenceEngine implements PersistenceEngine {
   constructor(
     private mongoClient: MongoClient,
     options?: {
-      eventJournalCollectionName?: string;
-      snapshotStoreCollectionName?: string;
+      eventsCollectionName?: string;
+      snapshotsCollectionName?: string;
     },
   ) {
     const db = this.mongoClient.db();
 
     this.eventsCollection = db.collection<PersistedEvent>(
-      options?.eventJournalCollectionName ?? DEFAULT_EVENT_JOURNAL_NAME,
+      options?.eventsCollectionName ?? DEFAULT_EVENT_JOURNAL_NAME,
     );
     this.snapshotsCollection = db.collection<PersistedSnapshot>(
-      options?.snapshotStoreCollectionName ?? DEFAULT_SNAPSHOT_STORE_NAME,
+      options?.snapshotsCollectionName ?? DEFAULT_SNAPSHOT_STORE_NAME,
     );
   }
 
