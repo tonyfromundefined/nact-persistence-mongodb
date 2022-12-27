@@ -1,4 +1,9 @@
-import type { Collection, MongoClient } from "mongodb";
+import type {
+  Collection,
+  CollectionOptions,
+  DbOptions,
+  MongoClient,
+} from "mongodb";
 import type {
   EventStream,
   PersistedEvent,
@@ -25,17 +30,23 @@ export class MongoDBPersistenceEngine implements PersistenceEngine {
   constructor(
     private mongoClient: MongoClient,
     options?: {
+      dbName?: string;
+      dbOptions?: DbOptions;
       eventsCollectionName?: string;
+      eventsCollectionOptions?: CollectionOptions;
       snapshotsCollectionName?: string;
+      snapshotsCollectionOptions?: CollectionOptions;
     },
   ) {
-    const db = this.mongoClient.db();
+    const db = this.mongoClient.db(options?.dbName, options?.dbOptions);
 
     this.eventsCollection = db.collection<PersistedEvent>(
       options?.eventsCollectionName ?? DEFAULT_EVENT_JOURNAL_NAME,
+      options?.eventsCollectionOptions,
     );
     this.snapshotsCollection = db.collection<PersistedSnapshot>(
       options?.snapshotsCollectionName ?? DEFAULT_SNAPSHOT_STORE_NAME,
+      options?.snapshotsCollectionOptions,
     );
   }
 

@@ -17,8 +17,12 @@ const mongoClient = new MongoClient("...");
 const system = start(
   configurePersistence(
     new MongoDBPersistenceEngine(mongoClient, {
+      dbName: "...", // optional
+      dbOptions: { ... }, // optional
       eventsCollectionName: "nact_events", // optional
+      eventsCollectionOptions: { ... }, // optional
       snapshotsCollectionName: "nact_snapshots", // optional
+      snapshotsCollectionOptions: { ... }, // optional
     }),
   ),
 );
